@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <title>My Kawaii List</title>
+  </head>
+  <body>
+    <header>
+      <h1>🌸 Kawaii List 🌸</h1>
+    </header>
+
+    <main>
+      <form id="todo-form">
+        <div>
+          <label for="todo-input">Ajouter une tâche</label>
+          <input
+            type="text"
+            id="todo-input"
+            placeholder="Ajoute une tâche mignonne…"
+            required
+            autocomplete="off"
+          />
+        </div>
+        <button type="submit">Ajouter ❤️</button>
+      </form>
+
+      <div id="filters">
+        <button data-filter="all" type="button" class="is-active">Tout</button>
+        <button data-filter="active" type="button">En cours</button>
+        <button data-filter="done" type="button">Terminée</button>
+      </div>
+
+      <ul id="todo-list" role="list"></ul>
+
+      <p id="empty-state" hidden>So empty… ✨</p>
+    </main>
+
+    <footer>
+      <small aria-live="polite">
+        <output id="count-total">0</output> items ·
+        <output id="count-done">0</output> done
+      </small>
+    </footer>
+
+    <script type="module" src="./src/main.ts" defer></script>
+  </body>
+</html>
