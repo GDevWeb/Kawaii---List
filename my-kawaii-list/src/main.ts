@@ -2,6 +2,12 @@
 
 import type { Todo, TODOS } from "./types/todo.types";
 
+/* Init */
+document.addEventListener("DOMContentLoaded", () => {
+  renderTodos(todos);
+  counts(todos);
+});
+
 // form
 const form: HTMLFormElement | null = document.querySelector("form");
 const todoInput: HTMLInputElement | null =
@@ -58,37 +64,53 @@ function renderTodos(todos: TODOS): void {
 
   todos.forEach((todo: Todo) => {
     const todoItem = document.createElement("li");
-    todoItem.classList = "todo-item";
-    const todoItemContent = `<p>${todo.text} <span>(Status: ${todo.done})</span></p>`;
-    todoItem.innerHTML = todoItemContent;
+    todoItem.dataset.id = todo.id;
+    todoItem.className = todo.done ? "todo-item done" : "todo-item";
+
+    const todoCheck = document.createElement("input");
+    todoCheck.type = "checkbox";
+    todoCheck.checked = todo.done;
+
+    const btnDelete = document.createElement("button");
+    btnDelete.addEventListener("click", () => remove(todo.id));
+    btnDelete.classList.add("btn-delete");
+    btnDelete.textContent = "Supprimer";
+    const todoText = document.createElement("p");
+    todoText.innerHTML = `${todo.text} <span>(Status: ${
+      todo.done ? "Terminé" : "En cours"
+    })</span>`;
+    todoItem.appendChild(todoCheck);
+    todoItem.appendChild(todoText);
+    todoItem.appendChild(btnDelete);
     todoList.appendChild(todoItem);
   });
 }
 
-function remove(id: string) {}
+function remove(id: string): void {
+  todos = todos.filter((todo) => todo.id !== id);
+  saveData();
+  counts(todos);
+  renderTodos(todos);
+}
 
 function filter() {}
 
-function counts(todos: TODOS): number {
-  const totalTodos = todos.length;
-  if (countTotal) {
-    countTotal.value = totalTodos.toString();
-  }
+const setOutput = (el: HTMLOutputElement | null, n: number) => {
+  if (!el) return;
+  const s = String(n);
+  el.value = s;
+  el.textContent = s;
+};
 
-  const totalDone = todos.filter((t) => t.done === true).length;
-  console.log("filteredTotalDone", totalDone);
-  if (countDone) {
-    countDone.value = totalDone.toString();
-  }
-
-  return totalTodos;
+function counts(todos: TODOS) {
+  const total = todos.length;
+  const done = todos.filter((t) => t.done).length;
+  setOutput(countTotal, total);
+  setOutput(countDone, done);
+  return { total, done };
 }
-/* Init */
-document.addEventListener("DOMContentLoaded", () => {
-  renderTodos(todos);
-  counts(todos);
-});
-/* localStorage */
+
+/* ***localStorage*** */
 function saveData() {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
