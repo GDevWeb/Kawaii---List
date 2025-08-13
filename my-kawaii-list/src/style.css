@@ -20,13 +20,14 @@
   --ring: #f472b6; /* focus */
 }
 
-/* Optionnel: typographie douce (Poppins/Quicksand) si tu ajoutes la font dans <head> */
+/* Optionnel: typographie douce (Poppins/Quicksand)*/
 html,
 body {
   height: 100%;
 }
 * {
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -43,6 +44,10 @@ body {
 
 /* Container central */
 main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 1.6rem;
   max-width: 720px;
   margin: 48px auto;
   background: var(--white);
@@ -67,12 +72,19 @@ header h1 {
   color: transparent;
 }
 
+header img {
+  width: 200px;
+  margin: 10px auto;
+}
 /* ===== Formulaire ===== */
 #todo-form {
   display: flex;
   gap: 12px;
   margin: 22px 0 14px;
+  align-items: center;
+  justify-content: end;
 }
+
 #todo-input {
   flex: 1;
   height: 46px;
@@ -174,7 +186,7 @@ header h1 {
   border-color: var(--pink-300);
 }
 
-/* Checkbox custom (si tu en utilises une) */
+/* Checkbox custom*/
 .todo-check {
   appearance: none;
   width: 20px;
@@ -219,7 +231,8 @@ header h1 {
 }
 
 /* Bouton supprimer */
-.btn-delete {
+.btn-delete,
+#btn-clear {
   border: none;
   background: transparent;
   color: #ef4444;
@@ -230,13 +243,16 @@ header h1 {
   cursor: pointer;
   transition: background 0.15s ease, transform 0.06s ease;
 }
-.btn-delete:hover {
+.btn-delete:hover,
+#btn-clear:hover {
   background: #fee2e2;
 }
-.btn-delete:active {
+.btn-delete:active,
+#btn-clear:active {
   transform: translateY(1px);
 }
-.btn-delete:focus-visible {
+.btn-delete:focus-visible,
+#btn-clear:focus-visible {
   outline: 3px solid var(--ring);
   outline-offset: 2px;
 }

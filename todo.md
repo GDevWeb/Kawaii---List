@@ -1,7 +1,3 @@
-No worries at all — we’ll stick to English from here. 👍
-
-Here’s the **concise checklist** for your Kawaii List using the **mix approach** (functional core + tiny UI class). No code, just tasks.
-
 # Functional core (pure functions) — `src/core/todos.ts`
 
 - **Data model**: `Todo = { id, text, done, createdAt }`.
@@ -26,10 +22,10 @@ Here’s the **concise checklist** for your Kawaii List using the **mix approach
 - **mount()**: get DOM refs, bind events, `this.todos = load()`, `render()`.
 - **Event handlers**:
 
-  - `handleAdd(e)` → read input → `add()` → `setState()`.
-  - `handleToggle(id)` (event delegation on list) → `toggle()` → `setState()`.
-  - `handleDelete(id)` → `remove()` → `setState()`.
-  - `handleFilterChange(mode)` → update `filter` → `render()`.
+  - ❎`handleAdd(e)` → read input → `add()` → `setState()`.
+  - ❎`handleToggle(id)` (event delegation on list) → `toggle()` → `setState()`.
+  - ❎`handleDelete(id)` → `remove()` → `setState()`.
+  - ❎`handleFilterChange(mode)` → update `filter` → `render()`.
 
 - **setState(nextTodos)**: update memory → `save()` → `render()`.
 - **render()**:
@@ -56,6 +52,7 @@ Here’s the **concise checklist** for your Kawaii List using the **mix approach
 
 # Nice-to-haves (after MVP)
 
+- Confirm on sensible action.
 - Inline edit, clear completed, undo last action.
 - Drag & drop reorder.
 - Export/Import JSON.
